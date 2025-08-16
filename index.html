@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast Me - Developer Reality Check</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: backgroundShift 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            100% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .roast-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 25px 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
+        .roast-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        }
+
+        .roast-button:active {
+            transform: translateY(-2px);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .roast-display {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.5s ease;
+        }
+
+        .roast-text {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .roast-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fire-emoji {
+            font-size: 2rem;
+            margin: 0 10px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .roast-button {
+                font-size: 1.5rem;
+                padding: 20px 40px;
+                margin-bottom: 2rem;
+            }
+
+            .roast-text {
+                font-size: 1.2rem;
+            }
+
+            .roast-display {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .roast-button {
+                font-size: 1.3rem;
+                padding: 18px 35px;
+            }
+
+            .roast-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 ROAST ME 🔥</h1>
+        <p class="subtitle">Reality check for aspiring developers</p>
+        
+        <button class="roast-button" onclick="generateRoast()">
+            ROAST ME!
+        </button>
+        
+        <div class="roast-display">
+            <div class="roast-text" id="roastText">
+                Click the button to get roasted! 🔥
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const roasts = [
+            "Stop flexing in WhatsApp groups and start flexing in GitHub commits.",
+            "Your DSA sheet won't solve itself, champ.",
+            "If procrastination was a sport, you'd have an Olympic gold by now.",
+            "The only bug you've fixed this week is in your kitchen.",
+            "Even ChatGPT is coding more than you today.",
+            "Your resume currently says: Professional Scroller, Expert Loafer.",
+            "Stop daydreaming about startups and start writing 'hello world' first.",
+            "Your friends don't care about your memes, they care if you can solve merge sort.",
+            "Code won't bite, unlike your crush who ignores you.",
+            "If debugging is hard, try explaining your zero GitHub activity.",
+            "You say you want to be an AI engineer, but you can't even engineer a for-loop.",
+            "Legends say your VS Code hasn't been opened in weeks.",
+            "Stop gossiping and start compiling.",
+            "You can't deploy excuses to production.",
+            "Your WhatsApp status won't get you a placement.",
+            "If laziness was an API, you'd be its main endpoint.",
+            "Your brain is in infinite loop: Scroll, Sleep, Repeat.",
+            "Even your calculator does more math than you.",
+            "Stack Overflow doesn't want your browsing, it wants your contribution.",
+            "Stop simping, start scripting.",
+            "Your GitHub graph is flatter than your motivation.",
+            "You've watched more coding tutorials than you've written actual code.",
+            "Your portfolio website is still 'Coming Soon' from 2022.",
+            "You're still googling 'How to center a div' after 3 years.",
+            "Your commit messages are more creative than your actual code.",
+            "You spend more time choosing fonts than writing functions.",
+            "Your rubber duck is tired of explaining basic syntax to you.",
+            "You're debugging your life more than your code.",
+            "Your terminal history is just 'git status' repeated 500 times.",
+            "You're still waiting for the perfect project idea to start coding.",
+            "Your biggest accomplishment is successfully installing Node.js.",
+            "You've been 'learning React' for longer than React has existed.",
+            "Your code reviews consist of adding console.log() everywhere.",
+            "You're more familiar with memes than design patterns.",
+            "Your error handling strategy is 'try again tomorrow'.",
+            "You've bookmarked more resources than you've actually read.",
+            "Your biggest fear isn't bugs, it's job interviews.",
+            "You're still using Internet Explorer... of coding practices.",
+            "Your functions are longer than your attention span.",
+            "You've mastered copy-paste but not problem-solving."
+        ];
+
+        function generateRoast() {
+            const roastTextElement = document.getElementById('roastText');
+            const randomIndex = Math.floor(Math.random() * roasts.length);
+            const selectedRoast = roasts[randomIndex];
+            
+            // Hide current text with animation
+            roastTextElement.classList.remove('show');
+            
+            // Change text after animation completes
+            setTimeout(() => {
+                roastTextElement.innerHTML = `<span class="fire-emoji">🔥</span>${selectedRoast}<span class="fire-emoji">🔥</span>`;
+                roastTextElement.classList.add('show');
+            }, 250);
+            
+            // Add shake animation to button
+            const button = document.querySelector('.roast-button');
+            button.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                button.style.animation = '';
+            }, 500);
+        }
+
+        // Initialize with animation
+        window.addEventListener('load', () => {
+            document.getElementById('roastText').classList.add('show');
+        });
+    </script>
+</body>
+</html>
